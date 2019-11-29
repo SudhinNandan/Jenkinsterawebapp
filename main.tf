@@ -1,8 +1,7 @@
 provider "azurerm" {
-
+  version         = "=1.24.0"
   subscription_id = "da9510b8-3397-4012-a20c-328a1b93c19e"
 }
-
 
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
