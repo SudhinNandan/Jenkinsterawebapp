@@ -1,3 +1,5 @@
+withCredentials([azureServicePrincipal('sitecorepocpowershell')])
+
 pipeline {
     /*  Jenkinsfile */
     /* Used Dev branch to further develop the code for IaC */
