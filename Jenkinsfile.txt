@@ -1,4 +1,11 @@
-withCredentials([azureServicePrincipal('sitecorepocpowershell')])
+
+pipeline {
+    /*  Jenkinsfile */
+    /* Used Dev branch to further develop the code for IaC */
+    /*  Get Terraform resource file by checking out SCM*/
+    /* Create Security Group by Terraform resource file */
+    
+    withCredentials([azureServicePrincipal('sitecorepocpowershell')])
 
 
 
@@ -6,11 +13,6 @@ withCredentials([azureServicePrincipal('sitecorepocpowershell')])
       sh 'az login --service-principal -u 7648426e-1eae-4acf-87ea-db79242784e6 -p gvsGW6We8_TCb=i0-Xkj-icey6j=I=Kt -tenant 6e06e42d-6925-47c6-b9e7-9581c7ca302a'
       
         }
-pipeline {
-    /*  Jenkinsfile */
-    /* Used Dev branch to further develop the code for IaC */
-    /*  Get Terraform resource file by checking out SCM*/
-    /* Create Security Group by Terraform resource file */
     
     agent any
 
