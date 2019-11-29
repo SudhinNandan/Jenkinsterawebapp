@@ -1,18 +1,12 @@
-provider "azurerm" {
-  version         = "=1.27"
-  subscription_id = var.subscription_id
-}
-
 resource "azurerm_resource_group" "main" {
-  name     = "sitecorepocfull"
-  location = var.location
+  name     = "${var.prefix}-resources"
+  location = "${var.location}"
 }
 
-# This creates the plan that the service use
 resource "azurerm_app_service_plan" "main" {
-  name                = var.prefix-asp"
+  name                = "${var.prefix}-asp"
   location            = "${azurerm_resource_group.main.location}"
-  resource_group_name = "sitecorepocfull"
+  resource_group_name = "${azurerm_resource_group.main.name}"
   kind                = "Linux"
   reserved            = true
 
@@ -22,10 +16,15 @@ resource "azurerm_app_service_plan" "main" {
   }
 }
 
-# This creates the service definition
 resource "azurerm_app_service" "main" {
-  name                = var.prefix-appservice
-  location            = azurerm_resource_group.main.location
-  resource_group_name = "sitecorepocfull"
-  app_service_plan_id = azurerm_app_service_plan.main.id
+  name                = "${var.prefix}-appservice"
+  location            = "${azurerm_resource_group.main.location}"
+  resource_group_name = "${azurerm_resource_group.main.name}"
+  app_service_plan_id = "${azurerm_app_service_plan.main.id}"
+
+  site_config {
+    dotnet_framework_version = "v4.0"
+    remote_debugging_enabled = true
+    remote_debugging_version = "VS2015"
   }
+}
